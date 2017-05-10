@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Lista de Asistencia</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="theme.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/angular.min.js"></script>
+    <script src="js/script.js"></script>
+  </head>
+
+  <body ng-app="App">
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Hexavarsity</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container theme-showcase" role="main">
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>Lista de Asistencia</h1>
+        <p>Esta aplicacion nos permite añadir a los asistentes de un curso para utlizar la sala de entrenamiento del primer piso. Si el grupo es muy pequeño se recomendará una sala más pequeña y si sobrepasa el límite de cupo una sala más grande.</p>
+      </div>
+
+      <div class="panel panel-primary">
+            <div class="panel-heading">
+              <div class="col-md-12">
+                <h3 class="panel-title">Detalles</h3>
+              </div>
+              <br>
+            </div>
+            <div class="panel-body">
+              Tema <br>
+              Instructor
+            </div>
+      </div>
+      <div class="panel panel-primary" ng-controller="ListaCtrl">
+            <div class="panel-heading">
+              <div class="col-md-11">
+                <h3 class="panel-title">Asistentes </h3>
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-xs btn-primary" ng-click="add()">Nuevo</button>
+              </div>
+              <br>
+            </div>
+            <div class="panel-body">
+              <div>
+              <br>
+                <table>
+                  <tr>
+                    <td>Nombre</td>
+                    <td>ID</td>
+                    <td>Proyecto</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr ng-repeat="profile in Grupo">
+                    <td>
+                      <input type="text" ng-model="profile.nombre" ng-show="profile.editable">
+                      <span ng-hide="profile.editable">{{ profile.nombre }}</span>
+                    </td>
+                    <td>
+                      <input type="text" ng-model="profile.id" ng-show="profile.editable">
+                      <span ng-hide="profile.editable">{{ profile.id }}</span>
+                    </td>
+                    <td>
+                      <input type="text" ng-model="profile.proyecto" ng-show="profile.editable">
+                      <span ng-hide="profile.editable">{{ profile.proyecto }}</span>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-xs btn-default" ng-click="edit($index)" ng-hide="profile.editable">Editar</button>
+                      <button type="button" class="btn btn-xs btn-success" ng-click="save($index)" ng-show="profile.editable">Guardar</button>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-xs btn-danger" ng-click="delete($index)">Eliminar</button>
+                    </td>
+                  </tr>
+                </table>
+                El grupo tiene {{Grupo.length}} participantes
+              </div>
+              <div class="progress">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="{{Grupo.length}}" aria-valuemin="0" aria-valuemax="16" style="width: {{(Grupo.length*100)/16}}%;"><span class="sr-only">Cupo {{Grupo.length}} de 16</span></div>
+              </div>
+
+
+            </div>
+      </div>
+      
+      <div class="page-header">
+        <h1>Alerts</h1>
+      </div>
+      <div class="alert alert-info" role="alert">
+        <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+      </div>
+      <div class="alert alert-warning" role="alert">
+        <strong>Warning!</strong> Best check yo self, you're not looking too good.
+      </div>
+      <div class="alert alert-danger" role="alert">
+        <strong>Oh snap!</strong> Change a few things up and try submitting again.
+      </div>
+
+
+      <div class="page-header">
+        <h1>Progress bars</h1>
+      </div>
+      <div class="progress">
+        <div class="progress-bar progress-bar-warning" style="width: 20%"><span class="sr-only">20% Complete (warning)</span></div>
+      </div>
+
+    </div> <!-- /container -->
+
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/docs.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+
+</html>

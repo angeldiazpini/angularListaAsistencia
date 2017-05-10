@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="js/script.js"></script>
+  </head>
+
+  <body ng-app="App">
+  <div ng-controller="CrudCtrl">
+    <table>
+      <tr>
+        <td>Nombre</td>
+        <td>ID de empleado</td>
+        <td>Proyecto</td>
+        <td><span ng-click="add()">Nuevo</span></td>
+      </tr>
+      <tr ng-repeat="persona in Grupo">
+        <td>
+          <input type="text" ng-model="persona.nombre" ng-show="persona.editable">
+          <span ng-hide="persona.editable">{{ persona.nombre }}</span>
+        </td>
+        <td>
+          <input type="text" ng-model="persona.id" ng-show="persona.editable">
+          <span ng-hide="persona.editable">{{ persona.id }}</span>
+        </td>
+        <td>
+          <input type="text" ng-model="persona.proyecto" ng-show="persona.editable">
+          <span ng-hide="persona.editable">{{ persona.proyecto }}</span>
+        </td>
+        <td>
+          <span ng-click="edit($index)" ng-hide="persona.editable">Editar</span>
+          <span ng-click="save($index)" ng-show="persona.editable">Guardar</span>
+          <span ng-click="delete($index)">Eliminar</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+  </body>
+
+</html>
